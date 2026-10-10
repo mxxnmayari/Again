@@ -1953,71 +1953,92 @@
       const messagePopup = document.getElementById('moon-message-popup');
       if (!modal || !loadingView || !messagePopup) return;
 
+      // Clear any previous opening timer so quick taps cannot leave the loader stuck.
+      if (window.solaceMoonModalTimer) {
+        clearTimeout(window.solaceMoonModalTimer);
+        window.solaceMoonModalTimer = null;
+      }
+
+      // Set display explicitly as well as toggling Tailwind classes; this is more
+      // reliable on mobile browsers if utility-class styles conflict.
       loadingView.classList.remove('hidden');
+      loadingView.style.display = 'flex';
       messagePopup.classList.add('hidden');
+      messagePopup.style.display = 'none';
       modal.classList.remove('opacity-0', 'pointer-events-none');
 
-      const moons = sanitizeMoonData(appData.moonMessages);
-      const moonObj = moons[moonIdx] || moons[0];
-      let messageList = moonObj.messages || [];
-      if (messageList.length === 0) {
-        messageList = ["New message note coming soon..."];
+      try {
+        const moons = sanitizeMoonData(appData.moonMessages);
+        const moonObj = moons[moonIdx] || moons[0];
+        let messageList = Array.isArray(moonObj.messages)
+          ? moonObj.messages.filter(message => message !== null && message !== undefined && String(message).trim() !== '')
+          : [];
+        if (messageList.length === 0) {
+          messageList = ["New message note coming soon..."];
+        }
+
+        if (!appData.moonCategoryPointers || typeof appData.moonCategoryPointers !== 'object') {
+          appData.moonCategoryPointers = {};
+        }
+        if (!Array.isArray(appData.moonCategoryPointers[moonIdx])) {
+          appData.moonCategoryPointers[moonIdx] = [];
+        }
+
+        let readIndices = appData.moonCategoryPointers[moonIdx];
+        let availableIndices = [];
+        for (let i = 0; i < messageList.length; i++) {
+          if (!readIndices.includes(i)) availableIndices.push(i);
+        }
+        if (availableIndices.length === 0) {
+          readIndices = [];
+          availableIndices = messageList.map((_, i) => i);
+        }
+
+        const chosenMsgIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+        readIndices.push(chosenMsgIndex);
+        appData.moonCategoryPointers[moonIdx] = readIndices;
+        const selectedMessage = String(messageList[chosenMsgIndex] ?? "New message note coming soon...");
+
+        if (!Array.isArray(appData.moonHistory)) appData.moonHistory = [];
+        appData.moonHistory.unshift({
+          title: moonObj.title,
+          emoji: moonObj.emoji,
+          prompt: moonObj.prompt,
+          message: selectedMessage.replace(/<[^>]*>/g, ''),
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        });
+        saveToStorage();
+        renderOpenedMoonHistory();
+
+        document.getElementById('moon-modal-emoji').innerText = moonObj.emoji;
+        document.getElementById('moon-modal-title').innerText = moonObj.title;
+        document.getElementById('moon-modal-prompt').innerText = moonObj.prompt;
+        document.getElementById('moon-modal-content').innerText = selectedMessage;
+
+        const footerNoteEl = document.getElementById('moon-modal-footer-note-display');
+        if (footerNoteEl) footerNoteEl.innerText = appData.moonFooterNote || "Always here for you";
+      } catch (error) {
+        console.error('Could not open moon message:', error);
+        const contentEl = document.getElementById('moon-modal-content');
+        if (contentEl) contentEl.innerText = 'A little moonbeam got caught on its way. Please close this and tap the moon again.';
       }
 
-      if (!appData.moonCategoryPointers) {
-        appData.moonCategoryPointers = {};
-      }
-      if (!appData.moonCategoryPointers[moonIdx]) {
-        appData.moonCategoryPointers[moonIdx] = [];
-      }
-
-      let readIndices = appData.moonCategoryPointers[moonIdx];
-      let availableIndices = [];
-      for (let i = 0; i < messageList.length; i++) {
-        if (!readIndices.includes(i)) availableIndices.push(i);
-      }
-
-      if (availableIndices.length === 0) {
-        readIndices = [];
-        availableIndices = messageList.map((_, i) => i);
-      }
-
-      const randomAvailablePos = Math.floor(Math.random() * availableIndices.length);
-      const chosenMsgIndex = availableIndices[randomAvailablePos];
-
-      readIndices.push(chosenMsgIndex);
-      appData.moonCategoryPointers[moonIdx] = readIndices;
-
-      const selectedMessage = messageList[chosenMsgIndex];
-
-      if (!appData.moonHistory) appData.moonHistory = [];
-      appData.moonHistory.unshift({
-        title: moonObj.title,
-        emoji: moonObj.emoji,
-        prompt: moonObj.prompt,
-        message: selectedMessage.replace(/<[^>]*>/g, ''),
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
-      saveToStorage();
-      renderOpenedMoonHistory();
-
-      document.getElementById('moon-modal-emoji').innerText = moonObj.emoji;
-      document.getElementById('moon-modal-title').innerText = moonObj.title;
-      document.getElementById('moon-modal-prompt').innerText = moonObj.prompt;
-      
-      document.getElementById('moon-modal-content').innerText = selectedMessage;
-      
-      const footerNoteEl = document.getElementById('moon-modal-footer-note-display');
-      if (footerNoteEl) footerNoteEl.innerText = appData.moonFooterNote || "Always here for you";
-
-      setTimeout(() => {
+      // Always reveal the message, even if some saved moon data is incomplete.
+      window.solaceMoonModalTimer = setTimeout(() => {
         loadingView.classList.add('hidden');
+        loadingView.style.display = 'none';
         messagePopup.classList.remove('hidden');
-      }, 5000);
+        messagePopup.style.display = 'flex';
+        window.solaceMoonModalTimer = null;
+      }, 1800);
     }
 
     function closeMoonModal() {
       const modal = document.getElementById('moon-modal');
+      if (window.solaceMoonModalTimer) {
+        clearTimeout(window.solaceMoonModalTimer);
+        window.solaceMoonModalTimer = null;
+      }
       if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
     }
 
