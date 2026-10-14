@@ -216,11 +216,19 @@
       padding: 0 !important;
       margin: 0 !important;
       line-height: 1;
-      filter: drop-shadow(0 0 12px var(--accent-color-glow, rgba(251, 191, 36, 0.9)));
+      filter: drop-shadow(0 0 10px var(--moon-tab-glow-strong, rgba(251, 191, 36, 0.9))) drop-shadow(0 0 22px var(--moon-tab-glow, rgba(251, 191, 36, 0.35)));
+      animation: moonSoftGlow 2.8s ease-in-out infinite alternate;
       cursor: pointer;
       user-select: none;
       -webkit-tap-highlight-color: transparent !important;
       transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .moon-phase-emoji {
+      filter: drop-shadow(0 0 9px var(--moon-tab-glow-strong, rgba(251, 191, 36, 0.8)));
+    }
+    @keyframes moonSoftGlow {
+      0%, 100% { filter: drop-shadow(0 0 7px var(--moon-tab-glow-strong, rgba(251, 191, 36, 0.8))) drop-shadow(0 0 15px var(--moon-tab-glow, rgba(251, 191, 36, 0.3))); }
+      50% { filter: drop-shadow(0 0 13px var(--moon-tab-glow-strong, rgba(251, 191, 36, 0.8))) drop-shadow(0 0 25px var(--moon-tab-glow, rgba(251, 191, 36, 0.3))); }
     }
     .raw-moon-pile-btn:hover {
       filter: drop-shadow(0 0 28px var(--accent-color, rgba(251, 191, 36, 1))) drop-shadow(0 0 14px rgba(255, 255, 255, 1));
@@ -296,6 +304,14 @@
       background: linear-gradient(135deg, var(--accent-color, #B82C38), var(--accent-color-2, #E11D48)) !important;
       color: #ffffff !important;
       box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    }
+    #tab-btn-moons.tab-active-moons {
+      background: linear-gradient(135deg, #FACC15, #F59E0B) !important;
+      color: #1C1917 !important;
+      box-shadow: 0 0 12px rgba(250, 204, 21, 0.65), 0 0 26px rgba(245, 158, 11, 0.35);
+    }
+    #tab-btn-moons.tab-active-moons i {
+      color: #1C1917 !important;
     }
     .song-cat-pill {
       transition: all 0.2s ease;
@@ -788,7 +804,7 @@
     <div id="moon-message-popup" class="hidden bg-stone-900 rounded-3xl max-w-xl w-full p-5 md:p-8 space-y-5 shadow-2xl relative border-2 max-h-[92vh] flex flex-col justify-between overflow-hidden" style="border-color: var(--moon-tab-accent-1); color: var(--moon-tab-text);">
       <div class="flex items-start justify-between border-b pb-3.5 shrink-0" style="border-color: var(--moon-tab-glow);">
         <div class="flex items-center gap-3">
-          <span id="moon-modal-emoji" class="text-4xl">🌙</span>
+          <span id="moon-modal-emoji" class="moon-phase-emoji text-4xl">🌙</span>
           <div>
             <span id="moon-modal-title" class="serif-title text-xl md:text-2xl font-semibold tracking-wide block" style="color: var(--moon-tab-accent-1);">Letting go</span>
             <span class="text-[10px] mono-font uppercase tracking-widest block font-medium mt-0.5 opacity-80" style="color: var(--moon-tab-text);">READ ME WHEN…</span>
@@ -1117,8 +1133,8 @@
         moonsBg: "#1C1C1E",
         cardBg: "#3A3A3C",
         text: "#F5F5F7",
-        accent1: "#AEAEB2",
-        accent2: "#6C6C70"
+        accent1: "#FACC15",
+        accent2: "#F59E0B"
       },
       savedCustomPalettes: [],
       letters: [
@@ -1169,9 +1185,9 @@
       ],
       moonMessages: [
         {
-          emoji: "🌒",
-          title: "New beginnings",
-          prompt: "Read me when you’re starting over.",
+          emoji: "🌑",
+          title: "New Beginnings",
+          prompt: "you’re starting over.",
           messages: [
             "Bubba, first of all, breathe. You don’t have to figure out your entire life by tomorrow, omkieee? Secondly, if you somehow manage to do that, please send me a copy of your methods bcuz WHAT DO YOU MEAN? HAHAHAHAHAHA.\n\nBut srsly, woman, you can figure things out as you go. You don’t need to know exactly where you’re headed before you start moving. Sometimes, you just need to decide what you’re going to do next and let the rest reveal itself eventually.",
             "Pick one thing you want to work on and start there. You can leave the other two (three or five) things for another day.\n\nAnd please don’t feel like a fresh start has to look impressive for it to count. Nobody needs to see some grand transformation. If something feels a lil more right for you than it did before, that’s already something. Small steps still move you somewhere, bubba.",
@@ -1183,9 +1199,9 @@
           ]
         },
         {
-          emoji: "🌓",
-          title: "Hope & growth",
-          prompt: "Read me when you need a little hope.",
+          emoji: "🌒",
+          title: "Hope & Growth",
+          prompt: "you need a little hope.",
           messages: [
             "Hey, bubba. YK what I hope for you? That one day, you’ll look back at whatever’s bothering you rn and go, “Ay, kinaya ko naman pala.”\n\nNot bcuz everything was easy or bcuz the universe suddenly decided to behave itself, but bcuz you kept figuring things out even when you weren’t entirely sure what you were doing. HAHAHAHAHAHA.\n\nAnd I hope life surprises you in ways you weren’t even asking for. Good surprises naman sana at hindi puro plot twists, HAHAHAHAHAHA. I hope you get to experience things that remind you na hindi naman pala puro paghihirap at pag-o-overthink ang buhay. Let yourself enjoy the good things when they happen, woman, without immediately wondering when something’s going to go wrong. You deserve to be happy without having to brace yourself for the next disaster, too.",
             "Keep a little room for hope, yeah?\n\nNot the kind where you convince yourself that everything will go exactly as planned. We both know life doesn’t work that way HAHAHAHAHA. I mean the kind where you remember that even if one thing doesn’t work out, there might still be something else worth looking forward to.\n\nYou don’t have to know what that something is yet. And you don’t even have to feel particularly hopeful today. Just don’t close every door in your mind because one of them didn’t open.",
@@ -1197,9 +1213,9 @@
           ]
         },
         {
-          emoji: "🌔",
+          emoji: "🌓",
           title: "Courage",
-          prompt: "Read me when you’re facing something difficult.",
+          prompt: "you’re facing something difficult.",
           messages: [
             "Hey, bubba. IK whatever you’re dealing with rn might not be as simple as people make it sound. So no, I’m not going to tell you to just be positive or pretend it isn’t difficult. HAHAHAHAHA.\n\nYou can admit that something is hard without deciding that you’re incapable of getting through it. Those are two completely different things, woman.\n\nRemember the other times you weren’t sure how things would turn out? You still found ways to deal with them. That doesn’t guarantee everything will go perfectly this time, but it does mean you shouldn’t count yourself out before you’ve even started.",
             "When everything starts looking overwhelming, can we pls stop trying to solve the entire situation in your head at the same time? HAHAHAHAHAHA.\n\nWhat actually needs your attention first? What’s something you can do today? Is there a quest you need to ask or someone you need to talk to?\n\nStart there. You don’t need a complete map of the next five years before you take the next step. And if you need to pause halfway through and rethink things, then do that. We’re figuring things out, not competing in a race you invented for yourself.",
@@ -1211,7 +1227,7 @@
         {
           emoji: "🌔",
           title: "Perseverance",
-          prompt: "Read me when you feel like giving up.",
+          prompt: "you feel like giving up.",
           messages: [
             "You’re allowed to have bad days without turning them into a verdict on your entire life. One disappointing result doesn’t cancel all the work you’ve done. One unproductive afternoon doesn’t suddenly make you lazy. And one thing going wrong doesn’t mean the rest of your life is next in line (yk sometimes the day is just being a lil shit HAHAHAHAHAHA.)\n\nYou can learn from what happened without making it a whole character assassination of yourself. Figure out what you can fix, leave what you can’t for now, and give yourself another chance tomorrow.",
             "Bubba, you don’t have to do everything at maximum speed. I know you’d prolly prefer to get everything done immediately so you can finally stop thinking about it, but unfortunately, you’re a person and not a machine with an unlimited battery 🙄.\n\nTake longer if you need to. Adjust the timeline. Make room for things you didn’t anticipate. You don’t have to exhaust yourself just to prove that you’re serious about your goals.\n\nI hope you get to enjoy the life you’re working so hard to build, woman. It would be quite unfortunate if you reached every goal only to be too tired to enjoy any of it.",
@@ -1225,8 +1241,8 @@
         },
         {
           emoji: "🌕",
-          title: "Love & fullness",
-          prompt: "Read me when you want to know how much you mean to me.",
+          title: "Love & Fullness",
+          prompt: "you want to know how much you mean to me.",
           messages: [
             "If you ever wonder whether you matter to me, the answer is yes, bubba.\n\nNot just when you’re funny or when we have a good conversation or when you happen to say something that makes me smile at my phone like an idiot HAHAHAHAHAHA.\n\nYou matter to me bcuz I’ve gotten to know you, and somewhere along the way, I’ve found more and more little things to appreciate about you. You don’t have to perform, impress me, or be in a particularly good mood for that to be true.\n\nYou can just be you. Simple as that.",
             "You’re genuinely one of my fave people to tease, and I will not be taking questions at this time HAHAHAHAHAHA.\n\nBut srsly, underneath all the banter and the nonsense, there’s a lot of genuine fondness here. I enjoy talking to you, hearing your thoughts, and finding out all the little things about you that I wouldn’t know otherwise.\n\nYou’re someone I look forward to hearing from, bubba. Someone who can turn an ordinary conversation into something I remember later.\n\nAnd no, don’t let this go to your head. I still reserve the right to tease you affectionately. 😌",
@@ -1242,7 +1258,7 @@
         {
           emoji: "🌖",
           title: "Appreciation",
-          prompt: "Read me when you need to remember how special you are.",
+          prompt: "you need to remember how special you are.",
           messages: [
             "Bubba, I hope you have people around you who appreciate you even when you aren’t doing anything particularly impressive.\n\nPeople who don’t need you to accomplish something, or make their day better before they remind you that you’re worth having around.\n\nAnd I hope you learn to do that for yourself, too.\n\nYou’re allowed to have an ordinary day. You’re allowed to be tired, quiet, confused, or just not in the mood to be your usual self. You don’t have to earn kindness by being useful all the time.",
             "I’m proud of you for the things you finish. But I’m also proud of you for the things you keep trying to do even when nobody’s clapping for you. The difficult things you keep showing up for. The decisions you take time to think through. The days when you don’t feel particularly confident but try anyway.\n\nThose count, too, bubba.",
@@ -1255,9 +1271,9 @@
           ]
         },
         {
-          emoji: "🌘",
-          title: "Letting go",
-          prompt: "Read me when you’re holding on to something that hurts.",
+          emoji: "🌗",
+          title: "Letting Go",
+          prompt: "you’re holding on to something that hurts.",
           messages: [
             "Bubba, please be a little kinder to the version of yourself who didn’t know then what you know now. Maybe she trusted someone she shouldn’t have. Maybe she stayed longer than she should have. Maybe she made a decision that makes absolutely no sense to you now.\n\nBut she was making those choices with the understanding she had at the time. You can acknowledge what you’d do differently without treating your past self like an idiot for not knowing the future.\n\nPS. You can learn from her without being cruel to her. She got you here, woman. Give her a lil grace.",
             "You can miss a person, a place, or an old version of yourself without needing to go back.\n\nSometimes you miss the good parts. Sometimes you miss what you hoped something would become. And sometimes you just miss how things felt before you knew what you know now.\n\nThat doesn’t automatically mean you made the wrong decision by leaving. You can miss something and still know it isn’t where you belong anymore, bubba. Both can be true.",
@@ -1269,9 +1285,9 @@
           ]
         },
         {
-          emoji: "🌑",
-          title: "Rest & reassurance",
-          prompt: "Read me when you’re exhausted.",
+          emoji: "🌘",
+          title: "Rest & Reassurance",
+          prompt: "you’re exhausted.",
           messages: [
             "Woman. Put the task down for a second. Yes, down. HAHAHAHAHAHA.\n\nIk you have approximately four (five, maybe seventeen) things to finish, but last time I checked, you’re a person and not a company with unlimited operating hours. 🙄\n\nTake a breath. Unclench your jaw. Relax your shoulders. Have you had water? Have you eaten?\n\nAnd before you answer with something evasive, remember that Ik how to ask follow-up questions.",
             "Bubba, you can love your life and still get tired of it sometimes.\n\nYou can be grateful for the opportunities you have and still feel overwhelmed by the responsibilities that come with them. You can want something very badly and still need a break from working toward it.\n\nThose feelings can coexist together. One doesn’t cancel the other out.\n\nSo pls stop making yourself feel guilty for being tired, woman. You don’t need to prove that you’re grateful by refusing to rest.",
@@ -1286,8 +1302,8 @@
         },
         {
           emoji: "🌑",
-          title: "A promise",
-          prompt: "Read me when you’re wondering what comes next.",
+          title: "A Promise",
+          prompt: "you’re wondering what comes next.",
           messages: [
             "IT would be nice if life came with a lil preview, no? HAHAHAHAHAHA. Kahit trailer lang. Five stars if may happy ending.\n\nBut unfortunately, neither of us gets to read ahead. We have to figure things out when we get there, which is honestly a very inconvenient arrangement.\n\nSo I hope you give yourself room to change your mind, try new things, and discover that maybe you want something different from what you wanted before. You don’t have to have the next ten years figured out just because you’re thinking about tomorrow.\n\nWhatever life looks like for you along the way, I hope you don’t forget to actually live it while you’re busy trying to figure it out.",
             "I promise to keep rooting for you, even on the days when you don’t feel particularly impressive or when your plans don’t work out the way you wanted.\n\nYou don’t have to accomplish something extraordinary for me to be proud of you. You don’t have to have a particularly good day, say something clever, or convince me that you’re handling everything perfectly.\n\nI hope you keep giving yourself chances, even when things get messy. I hope you keep finding things that make you excited about the future, and I hope you remember to give yourself credit for the work you’re doing along the way.\n\nAnd if you need someone to remind you of those things every now and then, well, you know where to find me, woman. HAHAHAHAHAHA.",
@@ -1637,8 +1653,16 @@
       document.documentElement.style.setProperty('--moon-tab-bg', moonTheme.moonsBg || '#1C1C1E');
       document.documentElement.style.setProperty('--moon-tab-card-bg', moonTheme.cardBg || '#3A3A3C');
       document.documentElement.style.setProperty('--moon-tab-text', moonTheme.text || '#F5F5F7');
-      document.documentElement.style.setProperty('--moon-tab-accent-1', moonTheme.accent1 || '#AEAEB2');
-      document.documentElement.style.setProperty('--moon-tab-accent-2', moonTheme.accent2 || '#6C6C70');
+      // Keep the moon section's accents warm yellow regardless of saved theme settings.
+      const moonAccent = '#FACC15';
+      const moonAccent2 = '#F59E0B';
+      const moonAccentMatch = /^#([0-9a-f]{6})$/i.exec(moonAccent);
+      const moonAccentHex = moonAccentMatch ? moonAccentMatch[1] : 'FACC15';
+      const moonAccentRgb = [0, 2, 4].map(offset => parseInt(moonAccentHex.slice(offset, offset + 2), 16));
+      document.documentElement.style.setProperty('--moon-tab-accent-1', moonAccent);
+      document.documentElement.style.setProperty('--moon-tab-accent-2', moonAccent2);
+      document.documentElement.style.setProperty('--moon-tab-glow', `rgba(${moonAccentRgb.join(', ')}, 0.16)`);
+      document.documentElement.style.setProperty('--moon-tab-glow-strong', `rgba(${moonAccentRgb.join(', ')}, 0.78)`);
 
       updatePasscodeThemeColor();
 
@@ -1950,7 +1974,7 @@
         stackedMoonsHtml += `<button onclick="openMoonModal(${i % moons.length})" class="raw-moon-pile-btn ${randomSize} active:scale-125" title="Tap Moon Phase">${m.emoji}</button>`;
       }
       jarContainer.innerHTML = stackedMoonsHtml;
-      promptGrid.innerHTML = moons.map((m, idx) => ` <button onclick="openMoonModal(${idx})" class="p-3.5 rounded-2xl border text-left transition-all group flex items-start gap-3 backdrop-blur-md" style="background-color: var(--moon-tab-glow); border-color: var(--moon-tab-accent-1);"> <span class="text-3xl shrink-0 group-hover:scale-110 transition-transform">${m.emoji}</span> <div class="space-y-0.5 overflow-hidden"> <span class="serif-title text-base md:text-lg font-medium block tracking-wide" style="color: var(--moon-tab-accent-1);">${escapeHtml(m.title)}</span> <span class="text-[10px] mono-font uppercase tracking-widest block font-medium opacity-85" style="color: var(--moon-tab-text);">Read me when…</span> <p class="serif-title text-sm md:text-base font-light italic leading-tight" style="color: var(--moon-tab-text);">${escapeHtml(m.prompt)}</p> </div> </button>`).join('');
+      promptGrid.innerHTML = moons.map((m, idx) => ` <button onclick="openMoonModal(${idx})" class="p-3.5 rounded-2xl border text-left transition-all group flex items-start gap-3 backdrop-blur-md" style="background-color: var(--moon-tab-glow); border-color: var(--moon-tab-accent-1);"> <span class="moon-phase-emoji text-3xl shrink-0 group-hover:scale-110 transition-transform">${m.emoji}</span> <div class="space-y-0.5 overflow-hidden"> <span class="serif-title text-base md:text-lg font-medium block tracking-wide" style="color: var(--moon-tab-accent-1);">${escapeHtml(m.title)}</span> <span class="text-[10px] mono-font uppercase tracking-widest block font-medium opacity-85" style="color: var(--moon-tab-text);">Read me when…</span> <p class="serif-title text-sm md:text-base font-light italic leading-tight" style="color: var(--moon-tab-text);">${escapeHtml(m.prompt)}</p> </div> </button>`).join('');
       renderMoonEditorList();
       renderOpenedMoonHistory();
       if (window.lucide) lucide.createIcons();
