@@ -21,17 +21,17 @@
 
   <style>
     :root {
-      --bg-primary: #FFF8F6;
-      --card-bg: #FFFFFF;
-      --text-primary: #3A1B20;
-      --accent-color: #B82C38;
-      --accent-color-2: #E11D48;
-      --opening-bg: #1c1917;
-      --opening-text: #fff8f6;
-      --header-bg: #ffffff;
-      --header-text: #1c1917;
-      --border-color: rgba(184, 44, 56, 0.2);
-      --accent-color-glow: rgba(225, 29, 72, 0.28);
+      --bg-primary: #F5F5F7;
+      --card-bg: #E5E5E7;
+      --text-primary: #1C1C1E;
+      --accent-color: #1C1C1E;
+      --accent-color-2: #AEAEB2;
+      --opening-bg: #1C1C1E;
+      --opening-text: #F5F5F7;
+      --header-bg: #E5E5E7;
+      --header-text: #1C1C1E;
+      --border-color: rgba(174, 174, 178, 0.45);
+      --accent-color-glow: rgba(174, 174, 178, 0.28);
     }
 
     body {
@@ -97,8 +97,8 @@
     }
 
     .letter-stationery-paper {
-      background-color: #FFFFFF !important;
-      color: #1f2937 !important;
+      background-color: #E5E5E7 !important;
+      color: #1C1C1E !important;
       box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.03), 0 4px 20px rgba(0, 0, 0, 0.06);
       border: 1px solid rgba(0, 0, 0, 0.08);
       position: relative;
@@ -131,7 +131,7 @@
     }
 
     .cassette-label-sticker {
-      background: #fffdf9;
+      background: #F5F5F7;
       border-top: 4px solid var(--accent-color, #B82C38);
       border-radius: 14px;
       box-shadow: inset 0 0 10px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
@@ -677,6 +677,13 @@
             <button id="song-cat-btn-reminds" onclick="filterSongsCategory('Reminds Me of You')" class="song-cat-pill bg-white/80 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium">Reminds Me of You</button>
             <button id="song-cat-btn-heart" onclick="filterSongsCategory('My Little Heart')" class="song-cat-pill bg-white/80 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium">My Little Heart</button>
           </div>
+          <div class="mt-3 rounded-2xl border px-4 py-3 space-y-1.5" style="background-color: var(--card-bg, #E5E5E7); border-color: var(--border-color);">
+            <p class="text-[11px] md:text-xs leading-relaxed" style="color: var(--text-primary);">
+              <span class="mono-font uppercase tracking-wider font-semibold">Listening order:</span>
+              Favorite <span aria-hidden="true">→</span> Reminds Me of You <span aria-hidden="true">→</span> My Little Heart.
+            </p>
+            <p class="text-[11px] md:text-xs leading-relaxed italic opacity-80" style="color: var(--text-primary);">If the music doesn’t start playing, tap the Play/Pause button once or twice to try again. No need to refresh, Bubba.</p>
+          </div>
           <div id="songs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4"></div>
         </div>
       </section>
@@ -1092,25 +1099,25 @@
         subtext: "Collection of letters, songs, and stories compiled with you in mind."
       },
       theme: {
-        introBg: "#FFF8F6",
-        songsBg: "#FFF8F6",
-        spotifyBg: "#FFF8F6",
-        storiesBg: "#FFF8F6",
-        cardBg: "#FFFFFF",
-        textPrimary: "#3A1B20",
-        accentColor: "#B82C38",
-        accentColor2: "#E11D48",
-        openingBg: "#1c1917",
-        openingText: "#fff8f6",
-        headerBg: "#ffffff",
-        headerText: "#1c1917"
+        introBg: "#F5F5F7",
+        songsBg: "#F5F5F7",
+        spotifyBg: "#F5F5F7",
+        storiesBg: "#F5F5F7",
+        cardBg: "#E5E5E7",
+        textPrimary: "#1C1C1E",
+        accentColor: "#1C1C1E",
+        accentColor2: "#AEAEB2",
+        openingBg: "#1C1C1E",
+        openingText: "#F5F5F7",
+        headerBg: "#E5E5E7",
+        headerText: "#1C1C1E"
       },
       moonTabTheme: {
-        moonsBg: "#07060d",
-        cardBg: "#120e24",
-        text: "#fef3c7",
-        accent1: "#fbbf24",
-        accent2: "#f59e0b"
+        moonsBg: "#1C1C1E",
+        cardBg: "#3A3A3C",
+        text: "#F5F5F7",
+        accent1: "#AEAEB2",
+        accent2: "#6C6C70"
       },
       savedCustomPalettes: [],
       letters: [
@@ -1616,35 +1623,36 @@
       const theme = appData.theme || defaultInitialData.theme;
       const moonTheme = appData.moonTabTheme || defaultInitialData.moonTabTheme;
 
-      document.documentElement.style.setProperty('--accent-color', theme.accentColor || '#B82C38');
-      document.documentElement.style.setProperty('--accent-color-2', theme.accentColor2 || '#E11D48');
-      document.documentElement.style.setProperty('--text-primary', theme.textPrimary || '#3A1B20');
-      document.documentElement.style.setProperty('--card-bg', theme.cardBg || '#FFFFFF');
-      document.documentElement.style.setProperty('--bg-primary', theme.introBg || '#FFF8F6');
-      document.documentElement.style.setProperty('--border-color', (theme.accentColor2 || '#E11D48') + '33');
-      document.documentElement.style.setProperty('--opening-bg', theme.openingBg || '#1c1917');
-      document.documentElement.style.setProperty('--opening-text', theme.openingText || '#fff8f6');
+      document.documentElement.style.setProperty('--accent-color', theme.accentColor || '#1C1C1E');
+      document.documentElement.style.setProperty('--accent-color-2', theme.accentColor2 || '#AEAEB2');
+      document.documentElement.style.setProperty('--text-primary', theme.textPrimary || '#1C1C1E');
+      document.documentElement.style.setProperty('--card-bg', theme.cardBg || '#E5E5E7');
+      document.documentElement.style.setProperty('--bg-primary', theme.introBg || '#F5F5F7');
+      document.documentElement.style.setProperty('--border-color', (theme.accentColor2 || '#AEAEB2') + '73');
+      document.documentElement.style.setProperty('--accent-color-glow', 'rgba(174, 174, 178, 0.28)');
+      document.documentElement.style.setProperty('--opening-bg', theme.openingBg || '#1C1C1E');
+      document.documentElement.style.setProperty('--opening-text', theme.openingText || '#F5F5F7');
 
-      document.documentElement.style.setProperty('--moon-tab-bg', moonTheme.moonsBg || '#07060d');
-      document.documentElement.style.setProperty('--moon-tab-card-bg', moonTheme.cardBg || '#120e24');
-      document.documentElement.style.setProperty('--moon-tab-text', moonTheme.text || '#fef3c7');
-      document.documentElement.style.setProperty('--moon-tab-accent-1', moonTheme.accent1 || '#fbbf24');
-      document.documentElement.style.setProperty('--moon-tab-accent-2', moonTheme.accent2 || '#f59e0b');
+      document.documentElement.style.setProperty('--moon-tab-bg', moonTheme.moonsBg || '#1C1C1E');
+      document.documentElement.style.setProperty('--moon-tab-card-bg', moonTheme.cardBg || '#3A3A3C');
+      document.documentElement.style.setProperty('--moon-tab-text', moonTheme.text || '#F5F5F7');
+      document.documentElement.style.setProperty('--moon-tab-accent-1', moonTheme.accent1 || '#AEAEB2');
+      document.documentElement.style.setProperty('--moon-tab-accent-2', moonTheme.accent2 || '#6C6C70');
 
       updatePasscodeThemeColor();
 
       if (activeTab === 'moons') {
-        document.body.style.backgroundColor = moonTheme.moonsBg || '#07060d';
-        document.body.style.color = moonTheme.text || '#fef3c7';
+        document.body.style.backgroundColor = moonTheme.moonsBg || '#1C1C1E';
+        document.body.style.color = moonTheme.text || '#F5F5F7';
         const header = document.getElementById('main-header');
         if (header) {
           header.style.backgroundColor = 'rgba(12, 10, 24, 0.95)';
-          header.style.color = moonTheme.text || '#fef3c7';
+          header.style.color = moonTheme.text || '#F5F5F7';
         }
         return;
       }
-      document.body.style.backgroundColor = theme.introBg || '#FFF8F6';
-      document.body.style.color = theme.textPrimary || '#3A1B20';
+      document.body.style.backgroundColor = theme.introBg || '#F5F5F7';
+      document.body.style.color = theme.textPrimary || '#1C1C1E';
       const header = document.getElementById('main-header');
       if (header) {
         header.style.backgroundColor = theme.headerBg || '#FFFFFF';
@@ -1652,8 +1660,8 @@
       }
       const openingScreen = document.getElementById('heart-opening-screen');
       if (openingScreen) {
-        openingScreen.style.backgroundColor = theme.openingBg || '#1c1917';
-        openingScreen.style.color = theme.openingText || '#fff8f6';
+        openingScreen.style.backgroundColor = theme.openingBg || '#1C1C1E';
+        openingScreen.style.color = theme.openingText || '#F5F5F7';
       }
       const openingBadge = document.getElementById('opening-badge-pill');
       if (openingBadge && appData.opening) {
@@ -1764,15 +1772,15 @@
         grid.innerHTML = `<div class="col-span-full text-center py-12 bg-white/60 rounded-3xl border border-stone-200 text-xs text-stone-400 font-light">No songs found in this category.</div>`;
         return;
       }
-      const accent1 = appData.theme?.accentColor || '#B82C38';
-      const accent2 = appData.theme?.accentColor2 || '#E11D48';
+      const accent1 = appData.theme?.accentColor || '#1C1C1E';
+      const accent2 = appData.theme?.accentColor2 || '#AEAEB2';
 
       grid.innerHTML = songs.map((song, idx) => {
         const cardId = `mixtape-${idx}`;
         const catLetter = getCategoryBadgeLetter(song.category);
         const cardStyle = getSongCategoryCardStyle(song.category || 'Favorite', accent1, accent2);
         const badgeBg = song.category === 'My Little Heart' ? `background: linear-gradient(135deg, ${accent1}, ${accent2});` : `background-color: ${song.category === 'Reminds Me of You' ? accent2 : accent1};`;
-        const badgeTextColor = song.category === 'My Little Heart' ? accent2 : (song.category === 'Reminds Me of You' ? accent2 : accent1);
+        const badgeTextColor = (song.category === 'My Little Heart' || song.category === 'Reminds Me of You') ? '#3A3A3C' : '#1C1C1E';
 
         return `  
         <div id="${cardId}" class="mixtape-card perspective-1000 w-full h-[320px]">  
@@ -1855,9 +1863,9 @@
         const isInserted = !!vinylPinInserted[idx];
         const cardId = `vinyl-card-${idx}`;
         const embedUrl = getSpotifyEmbedUrl(track.url);
-        const cardBgColor = isInserted ? '#120f24' : 'var(--card-bg, #ffffff)';
-        const cardTextColor = isInserted ? '#fef3c7' : 'var(--text-primary, #3A1B20)';
-        const sleeveBg = isInserted ? 'background: linear-gradient(135deg, #1e1b2e 0%, #0d0b14 100%); color: #fef3c7; border-color: var(--accent-color-2); box-shadow: 0 0 25px var(--accent-color-2);' : 'background-color: var(--card-bg, #ffffff); color: var(--text-primary, #3A1B20); border-color: var(--accent-color);';
+        const cardBgColor = isInserted ? '#3A3A3C' : 'var(--card-bg, #E5E5E7)';
+        const cardTextColor = isInserted ? '#F5F5F7' : 'var(--text-primary, #1C1C1E)';
+        const sleeveBg = isInserted ? 'background: linear-gradient(135deg, #1C1C1E 0%, #3A3A3C 100%); color: #F5F5F7; border-color: var(--accent-color-2); box-shadow: 0 0 25px rgba(174,174,178,0.25);' : 'background-color: var(--card-bg, #E5E5E7); color: var(--text-primary, #1C1C1E); border-color: var(--accent-color);';
 
         return `<div id="${cardId}" class="p-6 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col justify-between space-y-5 border-2 ${isInserted ? 'vinyl-glowing-active' : ''}" style="background-color: ${cardBgColor}; color: ${cardTextColor}; border-color: ${isInserted ? 'var(--accent-color-2)' : 'var(--border-color, rgba(0,0,0,0.1))'};">   
         <div class="flex items-center justify-between border-b pb-3 border-stone-200/60">   
@@ -2199,28 +2207,28 @@
         const dualText1 = document.getElementById('dual-hex-text-1');
         const dualPicker2 = document.getElementById('dual-hex-picker-2');
         const dualText2 = document.getElementById('dual-hex-text-2');
-        if (dualPicker1) dualPicker1.value = theme.accentColor || '#B82C38';
-        if (dualText1) dualText1.value = theme.accentColor || '#B82C38';
-        if (dualPicker2) dualPicker2.value = theme.accentColor2 || '#E11D48';
-        if (dualText2) dualText2.value = theme.accentColor2 || '#E11D48';
+        if (dualPicker1) dualPicker1.value = theme.accentColor || '#1C1C1E';
+        if (dualText1) dualText1.value = theme.accentColor || '#1C1C1E';
+        if (dualPicker2) dualPicker2.value = theme.accentColor2 || '#AEAEB2';
+        if (dualText2) dualText2.value = theme.accentColor2 || '#AEAEB2';
 
-        document.getElementById('theme-intro-bg-hex').value = theme.introBg || '#FFF8F6';
-        document.getElementById('theme-text-primary-hex').value = theme.textPrimary || '#3A1B20';
-        document.getElementById('theme-accent-color-hex').value = theme.accentColor || '#B82C38';
+        document.getElementById('theme-intro-bg-hex').value = theme.introBg || '#F5F5F7';
+        document.getElementById('theme-text-primary-hex').value = theme.textPrimary || '#1C1C1E';
+        document.getElementById('theme-accent-color-hex').value = theme.accentColor || '#1C1C1E';
         document.getElementById('theme-header-bg-hex').value = theme.headerBg || '#FFFFFF';
         document.getElementById('theme-header-text-hex').value = theme.headerText || '#1c1917';
-        document.getElementById('theme-opening-bg-hex').value = theme.openingBg || '#1c1917';
+        document.getElementById('theme-opening-bg-hex').value = theme.openingBg || '#1C1C1E';
 
-        document.getElementById('moontab-bg-picker').value = moonTheme.moonsBg || '#07060d';
-        document.getElementById('moontab-bg-text').value = moonTheme.moonsBg || '#07060d';
-        document.getElementById('moontab-card-picker').value = moonTheme.cardBg || '#120e24';
-        document.getElementById('moontab-card-text').value = moonTheme.cardBg || '#120e24';
-        document.getElementById('moontab-text-picker').value = moonTheme.text || '#fef3c7';
-        document.getElementById('moontab-text-hex').value = moonTheme.text || '#fef3c7';
-        document.getElementById('moontab-accent1-picker').value = moonTheme.accent1 || '#fbbf24';
-        document.getElementById('moontab-accent1-text').value = moonTheme.accent1 || '#fbbf24';
-        document.getElementById('moontab-accent2-picker').value = moonTheme.accent2 || '#f59e0b';
-        document.getElementById('moontab-accent2-text').value = moonTheme.accent2 || '#f59e0b';
+        document.getElementById('moontab-bg-picker').value = moonTheme.moonsBg || '#1C1C1E';
+        document.getElementById('moontab-bg-text').value = moonTheme.moonsBg || '#1C1C1E';
+        document.getElementById('moontab-card-picker').value = moonTheme.cardBg || '#3A3A3C';
+        document.getElementById('moontab-card-text').value = moonTheme.cardBg || '#3A3A3C';
+        document.getElementById('moontab-text-picker').value = moonTheme.text || '#F5F5F7';
+        document.getElementById('moontab-text-hex').value = moonTheme.text || '#F5F5F7';
+        document.getElementById('moontab-accent1-picker').value = moonTheme.accent1 || '#AEAEB2';
+        document.getElementById('moontab-accent1-text').value = moonTheme.accent1 || '#AEAEB2';
+        document.getElementById('moontab-accent2-picker').value = moonTheme.accent2 || '#6C6C70';
+        document.getElementById('moontab-accent2-text').value = moonTheme.accent2 || '#6C6C70';
 
         if (appData.opening) {
           document.getElementById('opening-badge-input').value = appData.opening.badgeText || "PROT. SPACE";
@@ -2639,12 +2647,12 @@
       document.getElementById('dual-hex-text-1').value = appData.theme.accentColor;
       document.getElementById('dual-hex-picker-2').value = appData.theme.accentColor2 || saved.accentColor;
       document.getElementById('dual-hex-text-2').value = appData.theme.accentColor2 || saved.accentColor;
-      document.getElementById('theme-intro-bg-hex').value = appData.theme.introBg || '#FFF8F6';
-      document.getElementById('theme-text-primary-hex').value = appData.theme.textPrimary || '#3A1B20';
-      document.getElementById('theme-accent-color-hex').value = appData.theme.accentColor || '#B82C38';
+      document.getElementById('theme-intro-bg-hex').value = appData.theme.introBg || '#F5F5F7';
+      document.getElementById('theme-text-primary-hex').value = appData.theme.textPrimary || '#1C1C1E';
+      document.getElementById('theme-accent-color-hex').value = appData.theme.accentColor || '#1C1C1E';
       document.getElementById('theme-header-bg-hex').value = appData.theme.headerBg || '#FFFFFF';
       document.getElementById('theme-header-text-hex').value = appData.theme.headerText || '#1c1917';
-      document.getElementById('theme-opening-bg-hex').value = appData.theme.openingBg || '#1c1917';
+      document.getElementById('theme-opening-bg-hex').value = appData.theme.openingBg || '#1C1C1E';
       saveToStorage();
       applyThemeColors();
       renderIntro();
@@ -2922,6 +2930,34 @@
         .replace(/'/g, '&#039;');
     }
 
+    function applySolaceMonochromePalette() {
+      // Keep all saved letters, songs, stories, and moon messages; update only their theme colors.
+      appData.theme = {
+        ...(appData.theme || {}),
+        introBg: '#F5F5F7',
+        songsBg: '#F5F5F7',
+        spotifyBg: '#F5F5F7',
+        storiesBg: '#F5F5F7',
+        cardBg: '#E5E5E7',
+        textPrimary: '#1C1C1E',
+        accentColor: '#1C1C1E',
+        accentColor2: '#AEAEB2',
+        openingBg: '#1C1C1E',
+        openingText: '#F5F5F7',
+        headerBg: '#E5E5E7',
+        headerText: '#1C1C1E'
+      };
+      appData.moonTabTheme = {
+        ...(appData.moonTabTheme || {}),
+        moonsBg: '#1C1C1E',
+        cardBg: '#3A3A3C',
+        text: '#F5F5F7',
+        accent1: '#AEAEB2',
+        accent2: '#6C6C70'
+      };
+      localStorage.setItem('dedicated_solace_site_data', JSON.stringify(appData));
+    }
+
     function initApp() {
       applyThemeColors();
       renderIntro();
@@ -2942,6 +2978,7 @@
 
     window.onload = async function() {
       await loadSolaceCloudDataBeforeRender();
+      applySolaceMonochromePalette();
       initApp();
     };
   </script>
